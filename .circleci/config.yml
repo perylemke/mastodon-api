@@ -7,15 +7,16 @@ jobs:
   tests:
     docker:
       - image: cimg/python:3.8
-    working_directory: ~/project
+      - image: circleci/mongo:4.2.0
     steps:
       - checkout
+      - setup_remote_docker
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Run MongoDB
+          name: MongoDB Install
           command: |
-            docker-compose up -d db
+            sudo apt-get install -y mongodb
       # - run:
       #     name: Run tests
       #     command: pytest -v --maxfail=1
