@@ -11,11 +11,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      # - run:
-      #     name: MongoDB Install
-      #     command: |
-      #       sudo apt-get update
-      #       sudo apt-get install -y mongodb
       - python/install-packages:
           pkg-manager: pip
       - run:
@@ -23,9 +18,9 @@ jobs:
           command: |
             python3 ~/project/examples/albums.py
             python3 ~/project/examples/members.py
-      # - run:
-      #     name: Run tests
-      #     command: pytest -v --maxfail=1
+      - run:
+          name: Run tests
+          command: pytest -v --maxfail=1
 
 workflows:
   sample:
