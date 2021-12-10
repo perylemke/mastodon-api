@@ -4,13 +4,12 @@ orbs:
   python: circleci/python@1.2
 
 jobs:
-  build-and-test:
+  tests:
     docker:
       - image: cimg/python:3.8
-      - image: circleci/mongo:4.2.0
+    working_directory: ~/mastodon-api
     steps:
       - checkout
-      - setup_remote_docker
       - python/install-packages:
           pkg-manager: pip
       - run:
@@ -20,4 +19,4 @@ jobs:
 workflows:
   sample:
     jobs:
-      - build-and-test
+      - tests
