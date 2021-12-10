@@ -7,13 +7,18 @@ jobs:
   tests:
     docker:
       - image: cimg/python:3.8
+    working_directory: ~/project
     steps:
       - checkout
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Run tests
-          command: pytest -v --maxfail=1
+          name: Run MongoDB
+          command: |
+            docker-compose up -d db
+      # - run:
+      #     name: Run tests
+      #     command: pytest -v --maxfail=1
 
 workflows:
   sample:
